@@ -6,27 +6,36 @@
 
 <ion-content [fullscreen]="true">
   <div class="ion-padding">
-    <!-- Correctly populate with categories coming from the API -->
     <ion-select
       class="ion-padding"
       placeholder="Select category"
       interface="popover"
+      (ionChange)="onCategoryChange($event)"
     >
-      <ion-select-option>Category 1</ion-select-option>
-      <ion-select-option>Category 2</ion-select-option>
+      <ion-select-option
+
+        *ngFor="let category of categories$ | async"
+        [value]="category.name"
+        >{{ category.name }}</ion-select-option
+      >
     </ion-select>
 
-    <!-- Filter products that have name or description matching the text -->
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar
+      (ionChange)="onSearchChange($event)"
+    ></ion-searchbar>
 
-    <!-- Filter products by their availability (isAvailable property) -->
-    <ion-checkbox class="ion-margin ion-padding">
+    <ion-checkbox
+      class="ion-margin ion-padding"
+      (ionChange)="onAvailabilityChange($event)"
+    >
       Product is available
     </ion-checkbox>
 
-    <!-- Display products using the product component and data from the API -->
     <ion-list class="ion-padding">
-      <app-product></app-product>
+      <app-product
+        *ngFor="let product of products$ | async"
+        [product]="product"
+      ></app-product>
     </ion-list>
   </div>
 </ion-content>
