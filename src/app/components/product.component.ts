@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product, Category } from '../shared/app.const';
 
-/**
- * Create a product component that has intuitive UI and UX.
- */
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   standalone: true,
 })
 export class ProductComponent implements OnInit {
+
+  @Input() product: Product | undefined;
+
   constructor() {}
 
   ngOnInit() {}
+
 }
